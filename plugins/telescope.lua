@@ -2,11 +2,26 @@ return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", enabled = vim.fn.executable "make" == 1, build = "make" },
+    { "nvim-telescope/telescope-fzf-writer.nvim" },
   },
   cmd = "Telescope",
   opts = function()
     local actions = require "telescope.actions"
     local get_icon = require("astronvim.utils").get_icon
+
+    require('telescope').setup {
+      extensions = {
+        fzf_writer = {
+          minimum_grep_characters = 20,
+          minimum_files_characters = 20,
+          -- Disabled by default.
+          -- Will probably slow down some aspects of the sorter, but can make color highlights.
+          -- I will work on this more later.
+          use_highlighter = true,
+        }
+      }
+    }
+
     return {
       defaults = {
         prompt_prefix = string.format("%s ", get_icon "Search"),
