@@ -13,6 +13,8 @@ return {
     local telescope = require "telescope"
 
     telescope.setup({
+      file_ignore_patterns = { ".git/", ".cache", "%.o", "%.a", "%.out", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip",
+        ".pkg/", "%.go" },
       extensions = {
         fzf = {
           fuzzy = true,                   -- false will only do exact matching
